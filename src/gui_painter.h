@@ -4,6 +4,7 @@
 
 struct GuiPainter : AbstractPainter
 {
+    void ClearScreen() const;
     void DrawField(Field field) const override;
     void DrawMessage(const std::string& message) const override;
     void DrawCursor(Point cursor) const override;

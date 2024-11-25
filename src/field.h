@@ -26,6 +26,8 @@ public:
     bool IsCellFlagged(int x, int y) const;
     Cell GetCell(int x, int y) const;
     int GetNeighbors(int x, int y) const;
+    void OpenNeighbors(int x, int y);
+    bool IsOpened() const;
 
 private:
     int CountNeighbors(int x, int y);

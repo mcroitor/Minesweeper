@@ -59,11 +59,22 @@ std::string Cell::ToString() const
     {
     case State::Closed:
         return "C";
+        break;
     case State::Opened:
         if (has_mine)
             return "M";
+        break;
     case State::Flagged:
         return "F";
+        break;
+    }
+    if(neighbors == 0){
+        return " ";
     }
     return std::to_string(neighbors);
+}
+
+bool Cell::HasMine() const
+{
+    return has_mine;
 }

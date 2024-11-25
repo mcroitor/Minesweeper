@@ -1,5 +1,5 @@
 CC = g++
-CXXFLAGS = -O2 -std=c++20 -I include
+CXXFLAGS = -O2 -std=c++23 -I include
 LDFLAGS = -L lib
 
 BINDIR = bin
