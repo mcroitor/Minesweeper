@@ -2,25 +2,36 @@
 
 #include <iostream>
 
-void ConsolePainter::DrawField(Field field)
+void ConsolePainter::DrawField(Field field) const
 {
     // draw top border
-    for(int i = 0; i < field.GetWidth() + 2; i++) {
+    for (int i = 0; i < field.GetWidth() + 2; i++)
+    {
         std::cout << "-";
     }
     std::cout << std::endl;
 
     // draw field
-    for(int y = 0; y < field.GetHeight(); y++) {
+    for (int y = 0; y < field.GetHeight(); y++)
+    {
         std::cout << "|";
-        for(int x = 0; x < field.GetWidth(); x++) {
-            if(field.IsCellOpened(x, y)) {
+        for (int x = 0; x < field.GetWidth(); x++)
+        {
+            if (field.IsCellOpened(x, y))
+            {
                 std::cout << field.GetNeighbors(x, y);
-            } else if(field.IsCellFlagged(x, y)) {
+            }
+            else if (field.IsCellFlagged(x, y))
+            {
                 std::cout << "F";
-            } else {
+            }
+            else
+            {
                 std::cout << " ";
             }
         }
     }
 }
+
+void ConsolePainter::DrawMessage(const std::string &) const {}
+void ConsolePainter::DrawCursor(Point) const {}
