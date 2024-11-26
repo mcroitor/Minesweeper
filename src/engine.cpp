@@ -53,6 +53,13 @@ void Engine::Run()
     {
         painter->DrawField(field);
         painter->DrawCursor(cursor);
+        // check if the game is won
+        if (field.IsOpened())
+        {
+            painter->SetCursor({1, field.GetHeight() + 2});
+            painter->DrawMessage("You won!");
+            return;
+        }
         // get user input
         // todo: input without screen echo
         auto c = __get_char();
@@ -93,13 +100,6 @@ void Engine::Run()
                 field.OpenNeighbors(cursor.x - 1, cursor.y - 1);
             }
             break;
-        }
-        // check if the game is won
-        if (field.IsOpened())
-        {
-            painter->SetCursor({1, field.GetHeight() + 2});
-            painter->DrawMessage("You won!");
-            return;
         }
     }
 }
