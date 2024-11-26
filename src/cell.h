@@ -19,4 +19,5 @@ public:
     void Open();
     void ToggleFlag();
     std::string ToString() const;
+    bool HasMine() const;
 };

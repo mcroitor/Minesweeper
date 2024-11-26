@@ -3,7 +3,13 @@
 #include <string>
 #include <format>
 
-void GuiPainter::DrawField(Field field)
+void GuiPainter::ClearScreen() const
+{
+    // Clear the screen
+    std::cout << "\033[2J";
+}
+
+void GuiPainter::DrawField(Field field) const
 {
     // Set cursor position to the top-left corner of the console
     std::cout << "\033[0;0H";
@@ -14,31 +20,25 @@ void GuiPainter::DrawField(Field field)
         std::cout << "|";
         for (int x = 0; x < field.GetWidth(); x++)
         {
-            if(field.IsCellOpened(x, y))
-            {
-                if(field.IsCellFlagged(x, y))
-                {
-                    std::cout << "P";
-                }
-                else
-                {
-                    int mines = field.GetNeighbors(x, y);
-                    if(mines == 0)
-                    {
-                        std::cout << " ";
-                    }
-                    else
-                    {
-                        std::cout << mines;
-                    }
-                }
-            }
-            else
-            {
-                std::cout << " ";
-            }
+            std::cout << field.GetCell(x, y).ToString();
         }
         std::cout << "|\n";
     }
     std::cout << std::format("+{}+\n", std::string(field.GetWidth(), '-'));
+}
+
+void GuiPainter::DrawMessage(const std::string &message) const
+{
+    std::cout << message << std::endl;
+}
+
+void GuiPainter::SetCursor(Point cursor) const
+{
+    std::cout << std::format("\033[{};{}H", cursor.y + 1, cursor.x + 1);
+}
+
+void GuiPainter::DrawCursor(Point cursor) const
+{
+    SetCursor(cursor);
+    std::cout << "X";
 }
