@@ -16,9 +16,12 @@ public:
     Field(int width, int height, int nr_mines);
     ~Field();
 
+    /// @brief 
+    /// @return width of the field
     int GetWidth();
     int GetHeight();
 
+    /// @brief Initialize the field, count neighbors, set mines etc.
     void Init();
     void OpenCell(int x, int y);
     void ToggleFlag(int x, int y);

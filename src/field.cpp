@@ -126,8 +126,8 @@ bool Field::IsOpened() const
     {
         for (int j = 0; j < width; j++)
         {
-            if (!IsCellOpened(j, i) || 
-                (cells[i][j].HasMine() && !IsCellFlagged(j, i)))
+            // if cell is not opened and it is not a mine
+            if (!IsCellOpened(j, i) && !cells[i][j].HasMine())
             {
                 return false;
             }

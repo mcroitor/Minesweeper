@@ -9,7 +9,8 @@ class Engine{
     Point cursor;
     AbstractPainter* painter;
 public:
-    Engine();
+    Engine(int width, int height, int nr_mines);
     ~Engine();
+    /// @brief Main game loop
     void Run();
 };

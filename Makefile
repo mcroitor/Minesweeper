@@ -9,7 +9,7 @@ OBJDIR = obj
 SRC = $(wildcard $(SRCDIR)/*.cpp)
 OBJ = $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 
-APP = app
+APP = minesweeper
 
 all: prepare $(APP)
 

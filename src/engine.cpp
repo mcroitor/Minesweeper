@@ -25,11 +25,20 @@ int __get_char()
     return ch;
 }
 
-Engine::Engine() : field{20, 10, 20},
+Engine::Engine(int width, int height, int nr_mines) : field{width, height, nr_mines},
                    cursor{.x = 1, .y = 1},
                    painter{new GuiPainter}
 {
     painter->ClearScreen();
+    // write info usage
+    painter->SetCursor({field.GetWidth() + 3, 1});
+    painter->DrawMessage("Use arrow keys to move cursor");
+    painter->SetCursor({field.GetWidth() + 3, 2});
+    painter->DrawMessage("Press 'f' to mark / unmark cell");
+    painter->SetCursor({field.GetWidth() + 3, 3});
+    painter->DrawMessage("Press 'space' to open cell");
+    painter->SetCursor({field.GetWidth() + 3, 4});
+    painter->DrawMessage("Press triple 'esc' to exit");
     field.Init();
 }
 
@@ -46,7 +55,7 @@ void Engine::Run()
         painter->DrawCursor(cursor);
         // get user input
         // todo: input without screen echo
-        char c = __get_char();
+        auto c = __get_char();
         // process user input
         switch (c)
         {
@@ -75,7 +84,7 @@ void Engine::Run()
             field.OpenCell(cursor.x - 1, cursor.y - 1);
             if (field.GetCell(cursor.x - 1, cursor.y - 1).HasMine())
             {
-                painter->DrawCursor({1, field.GetHeight() + 2});
+                painter->SetCursor({1, field.GetHeight() + 2});
                 painter->DrawMessage("Game over!");
                 return;
             }
@@ -88,7 +97,7 @@ void Engine::Run()
         // check if the game is won
         if (field.IsOpened())
         {
-            painter->DrawCursor({1, field.GetHeight() + 2});
+            painter->SetCursor({1, field.GetHeight() + 2});
             painter->DrawMessage("You won!");
             return;
         }

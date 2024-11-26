@@ -32,9 +32,13 @@ void GuiPainter::DrawMessage(const std::string &message) const
     std::cout << message << std::endl;
 }
 
+void GuiPainter::SetCursor(Point cursor) const
+{
+    std::cout << std::format("\033[{};{}H", cursor.y + 1, cursor.x + 1);
+}
+
 void GuiPainter::DrawCursor(Point cursor) const
 {
-    // set the cursor position to the cell, draw the cursor
-    std::cout << std::format("\033[{};{}H", cursor.y + 1, cursor.x + 1);
+    SetCursor(cursor);
     std::cout << "X";
 }

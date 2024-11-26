@@ -58,11 +58,11 @@ std::string Cell::ToString() const
     switch (state)
     {
     case State::Closed:
-        return "C";
+        return "+";
         break;
     case State::Opened:
         if (has_mine)
-            return "M";
+            return "B";
         break;
     case State::Flagged:
         return "F";
